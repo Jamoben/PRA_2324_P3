@@ -39,7 +39,7 @@ class HashTable: public Dict<V> {
 	    delete[] table;
 	}
 
-	int capacity(){return max}
+	int capacity(){return max;}
 
 	friend std::ostream& operator<<(std::ostream &out, const HashTable<V> &th){
 		out << "HashTable [entries: " << th.entries() << ", capacity: " << th.capacity() << "]" << endl;
@@ -47,7 +47,7 @@ class HashTable: public Dict<V> {
 		for(int i = 0; i < th.capacity; i++){
 		    out << "== Cubeta " << i << " ==" << endl << endl;
 		    out << "List => [ " << endl;
-		    for(j = 0; j < th.table[i].size(); j++){
+		    for(int j = 0; j < th.table[i].size(); j++){
 		    	out << "    " << th.table[i].get(j) << endl;
 		    }
 		out << "]" << endl;
@@ -73,9 +73,31 @@ class HashTable: public Dict<V> {
   	}
  
 	void insert(std::string key, V value) override{
-		if(){}
+	    int pos = h(key);
+    	    for(int i = 0; i < table[pos].size(); i++){
+      		if(table[pos].get(i).key == key){
+        	    throw runtime_error("Key already exists\n");
+      	    }
+    	}
+    	TableEntry<V> aux(key, value);
+    	table[pos].prepend(aux);
+    	n++;
 	}
         
+	V remove(std::string key) override{
+	    int pos = h(key);
+	    for(int i = 0; i < table[pos].size(); i++){
+	    	if(table[pos].get(i).key == key){
+        	    int x = table[pos].get(i).value;
+        	    table[pos].remove(i);
+        	    return x;
+      	        }
+            }
+    	throw runtime_error("Key not found!\n");
+  	}
+
+	int entries() override{return n;}
+
 };
 
 #endif
