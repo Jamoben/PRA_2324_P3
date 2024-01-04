@@ -39,12 +39,12 @@ class HashTable: public Dict<V> {
 	    delete[] table;
 	}
 
-	int capacity(){return max;}
+	int capacity() const {return max;}
 
 	friend std::ostream& operator<<(std::ostream &out, const HashTable<V> &th){
 		out << "HashTable [entries: " << th.entries() << ", capacity: " << th.capacity() << "]" << endl;
 		out << "======================" << endl << endl;
-		for(int i = 0; i < th.capacity; i++){
+		for(int i = 0; i < th.capacity(); i++){
 		    out << "== Cubeta " << i << " ==" << endl << endl;
 		    out << "List => [ " << endl;
 		    for(int j = 0; j < th.table[i].size(); j++){
@@ -96,7 +96,7 @@ class HashTable: public Dict<V> {
     	throw runtime_error("Key not found!\n");
   	}
 
-	int entries() override{return n;}
+	int entries() const override{return n;}
 
 };
 
