@@ -62,7 +62,7 @@ class HashTable: public Dict<V> {
 	
   	/*MÉTODOS DE DICT.H*/
 
-	V search(string key) override{ //Busca el valor correspondiente a key
+	V search(string key) override{ 
     	    int pos = h(key);
     	    for(int i = 0; i < table[pos].size(); i++){
       	        if(table[pos].get(i).key == key){
